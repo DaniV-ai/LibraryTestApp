@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+    <button onclick="test()">test</button>
+
+    <script>
+
+        var data = {
+            Id: 123,
+            Title: "testtt",
+            Author: "asdfasdf",
+            Genre: "asdf",
+            Available: true
+        }
+
+        function test1() {
+            $.get("api/books", (data, status) => {
+                console.log(data);
+            });
+        }
+
+        function test() {
+            $.post("http://localhost:7054/api/books", function (data) {
+                $(".result").html(data);
+            });
+        }
+
+
+    </script>
+
+</body>
+</html>
