@@ -10,11 +10,7 @@ namespace BookLibraryApp.Controllers
     [Route("api/books")]
     public class BookController : ControllerBase
     {
-        private readonly LibraryDbContext? _context;
-
-        public BookController()
-        {
-        }
+        private readonly LibraryDbContext _context;
 
         private BookController(LibraryDbContext context)
         {
@@ -23,9 +19,9 @@ namespace BookLibraryApp.Controllers
 
         // create/edit
         [HttpPost]
-        public JsonResult CreateEdit(Book? book)
+        public JsonResult CreateEdit([FromBody]Book? book)
         {
-            if (book != null && _context != null)
+            if (book != null)
             {
                 if (book.Id == 0)
                     _context.Books.Add(book);
@@ -43,7 +39,7 @@ namespace BookLibraryApp.Controllers
                 return new JsonResult(Ok(book));
             }
 
-            return new JsonResult(BadRequest());
+            return new JsonResult(BadRequest("Book ot DB is null"));
         }
 
         // get

@@ -25,6 +25,10 @@ namespace LibraryTestApp.Data
 
             modelBuilder.Entity<Book>().HasMany(e => e.Users)
                                         .WithMany(e => e.Books);
+
+            modelBuilder.SeedBooks();
+            modelBuilder.SeedUsers();
+
         }
 
         public virtual DbSet<User> Users { get; set; }

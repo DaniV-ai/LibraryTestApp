@@ -4,11 +4,14 @@
     <meta charset="utf-8" />
     <title></title>
     <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
     <button onclick="test()">test</button>
+    <button onclick="test1()">test1</button>
 
+    <h3 id="testOutput"></h3>
     <script>
 
         var data = {
@@ -20,15 +23,20 @@
         }
 
         function test1() {
-            $.get("api/books", (data, status) => {
-                console.log(data);
-            });
+            axios.get("/api/books", 1)
+                .then(resp => {
+                    console.log("server response ", resp);
+                });
         }
 
         function test() {
-            $.post("http://localhost:7054/api/books", function (data) {
-                $(".result").html(data);
-            });
+            axios.post("/api/books", { id: 123, title: "Some Book", author: "John Doe", genre: "fantasy", available: true })
+                .then(resp => {
+                    console.log("resp server", resp);
+                    var outputBlock = document.getElementById("testOutput").innerText;
+
+                    document.getElementById("testOutput").innerText = resp;
+                });
         }
 
 
