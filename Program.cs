@@ -11,7 +11,7 @@ namespace LibraryTestApp
 
             builder.Services.AddControllers();
             builder.Services.AddDbContext<LibraryDbContext>(opt =>
-                opt.UseInMemoryDatabase("LibraryTestDB"));
+                opt.UseNpgsql(@"Server=localhost:5432;Database=LibraryTestDB;User ID=user"));
 
             builder.Services.AddCors();
 
@@ -24,7 +24,6 @@ namespace LibraryTestApp
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
 
 
 

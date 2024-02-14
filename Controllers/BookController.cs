@@ -12,7 +12,7 @@ namespace BookLibraryApp.Controllers
     {
         private readonly LibraryDbContext _context;
 
-        private BookController(LibraryDbContext context)
+        public BookController(LibraryDbContext context)
         {
             _context = context;
         }
@@ -23,16 +23,16 @@ namespace BookLibraryApp.Controllers
         {
             if (book != null)
             {
-                if (book.Id == 0)
-                    _context.Books.Add(book);
-                else
+                // (book.Id == 0)
+                _context.Books.Add(book);
+                /*else
                 {
                     var bookInDb = _context.Books.Find(book);
                     if (bookInDb != null || book.Title == "" || book.Author == "" || book.Genre == "")
                         return new JsonResult(BadRequest());
 
                     bookInDb = book;
-                }
+                }*/
 
                 _context.SaveChanges();
 
